@@ -3,10 +3,9 @@ import { scraper } from "./scraper";
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  console.log("test 1");
-  // scraper();
-  res.send({ message: "scraper endpoint data" });
+router.get("/", async (req, res, next) => {
+  const bikes = await scraper();
+  res.send(bikes);
 });
 
 export default router;
