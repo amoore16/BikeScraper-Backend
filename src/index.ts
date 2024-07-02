@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
-import scraperRouter from "./scraperRouter";
+import scraperRouter from "./routes/scraperRouter";
 import router from "./routes";
 
 dotenv.config();

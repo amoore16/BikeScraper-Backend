@@ -1,5 +1,5 @@
 import express, { Express, Request, Response, Router } from "express";
-import { scraper } from "./bikesOnlineScraper";
+import { scraper } from "../tools/bikesOnlineScraper";
 import bikesOnlineRouter from "./bikesOnlineRouter";
 
 const router = express.Router();
