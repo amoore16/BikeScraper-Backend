@@ -2,9 +2,11 @@ import puppeteer from "puppeteer";
 
 type Bike = {
   title?: string | null | undefined;
+  price?: string | null | undefined;
+  description?: string[] | null | undefined;
 };
 
-const scraper = async (): Promise<Bike[]> => {
+const scraper = async (type: string): Promise<Bike[]> => {
   console.log("firing the web scraper!");
 
   // Launch the browser and open a new blank page
@@ -12,7 +14,7 @@ const scraper = async (): Promise<Bike[]> => {
   const page = await browser.newPage();
 
   // Navigate the page to a URL
-  await page.goto("https://www.bikesonline.com/bikes/road/performance");
+  await page.goto("https://www.bikesonline.com/bikes/" + type);
 
   // Set screen size
   await page.setViewport({ width: 1080, height: 1024 });
@@ -21,9 +23,19 @@ const scraper = async (): Promise<Bike[]> => {
 
   const bikeTitles = await page.$$eval(bikeWrapperSelector, (bikes) =>
     bikes.map((bike) => {
-      console.log("bike ", bike.querySelector("h3"));
+      console.log("test");
+
+      let descriptions: string[] = [];
+      bike
+        .querySelectorAll("li")
+        .forEach((li) => descriptions.push(li.innerText));
+
       return {
         title: bike.querySelector("h3")?.innerText,
+        price: bike.querySelector(
+          ".findify-components--cards--product--price__sale-price"
+        )?.innerHTML,
+        description: descriptions,
       };
     })
   );
