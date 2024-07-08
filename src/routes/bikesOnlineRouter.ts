@@ -11,8 +11,12 @@ router.get("/road", async (req, res, next) => {
 
 // get gravel
 router.get("/road", async (req, res, next) => {
-  const bikes = await scraper("/road/performance");
-  res.send(bikes);
+  try {
+    const bikes = await scraper("/road/performance");
+    res.send(bikes);
+  } catch {
+    res.send("error");
+  }
 });
 
 // get dual suspension

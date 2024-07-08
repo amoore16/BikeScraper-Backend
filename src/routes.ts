@@ -3,6 +3,9 @@ import scraperRouter from "./routes/scraperRouter";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.send("hello");
+});
 // scraper
 router.use("/scraper", scraperRouter);
 
