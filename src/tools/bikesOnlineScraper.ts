@@ -23,8 +23,6 @@ const scraper = async (type: string): Promise<Bike[]> => {
 
   const bikeTitles = await page.$$eval(bikeWrapperSelector, (bikes) =>
     bikes.map((bike) => {
-      console.log("test");
-
       let descriptions: string[] = [];
       bike
         .querySelectorAll("li")
@@ -42,6 +40,7 @@ const scraper = async (type: string): Promise<Bike[]> => {
 
   await browser.close();
 
+  console.log('returning: ', bikeTitles)
   return bikeTitles;
 };
 
