@@ -19,7 +19,7 @@ const scraper = async (type: string): Promise<Bike[]> => {
   // Set screen size
   await page.setViewport({ width: 1080, height: 1024 });
 
-  const bikeWrapperSelector = ".findify-product-wrapper";
+  const bikeWrapperSelector = ".findify-components--cards--product";
 
   const bikeTitles = await page.$$eval(bikeWrapperSelector, (bikes) =>
     bikes.map((bike) => {
@@ -34,13 +34,14 @@ const scraper = async (type: string): Promise<Bike[]> => {
           ".findify-components--cards--product--price__sale-price"
         )?.innerHTML,
         description: descriptions,
+        link: bike.getAttribute("href"),
+        image: bike.querySelector("img")?.getAttribute("src"),
       };
     })
   );
 
   await browser.close();
 
-  console.log('returning: ', bikeTitles)
   return bikeTitles;
 };
 
