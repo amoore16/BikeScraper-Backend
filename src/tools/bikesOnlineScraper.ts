@@ -6,7 +6,7 @@ type Bike = {
   description?: string[] | null | undefined;
 };
 
-const scraper = async (type: string): Promise<Bike[]> => {
+const bikesOnlineScraper = async (type: string): Promise<Bike[]> => {
   console.log("firing the web scraper!");
 
   // Launch the browser and open a new blank page
@@ -45,4 +45,4 @@ const scraper = async (type: string): Promise<Bike[]> => {
   return bikeTitles;
 };
 
-export { scraper };
+export { bikesOnlineScraper };

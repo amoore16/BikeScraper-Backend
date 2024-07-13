@@ -1,14 +1,15 @@
 import express, { Express, Request, Response, Router } from "express";
-import { scraper } from "../tools/bikesOnlineScraper";
 import bikesOnlineRouter from "./bikesOnlineRouter";
+import trekRouter from "./trekRouter";
 
 const router = express.Router();
 
 // different routes for each brand site
 router.use("/bikesOnline", bikesOnlineRouter);
 
-router.get("/trek", async (req, res, next) => {
-  res.send();
-});
+router.use("/trek", trekRouter);
+
+// make one router just for bike type?
+// router.user('/roadBikes')
 
 export default router;
