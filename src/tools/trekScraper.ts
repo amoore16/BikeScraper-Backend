@@ -29,8 +29,17 @@ const trekScraper = async (type: string): Promise<Bike[]> => {
         title: bike.querySelector("h3")?.innerText,
         price: bike.querySelector("p")?.innerText,
         // description: descriptions,
-        link: bike.querySelector("a")?.getAttribute("href"),
-        image: bike.querySelector("img")?.getAttribute("src"),
+        link:
+          "https://trekbikes.com" +
+          bike.querySelector("a")?.getAttribute("href"),
+        image:
+          "https://" +
+          bike
+            .querySelector("img")
+            ?.getAttribute("src")
+            ?.replace(/^.{2}/, "")
+            ?.replace(/1920w/g, "")
+            ?.replace(/\s+/g, ""),
       };
     })
   );

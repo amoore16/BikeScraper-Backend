@@ -1,14 +1,12 @@
-import { scraper } from "../tools/bikesOnlineScraper";
+import { bikesOnlineScraper } from "../tools/bikesOnlineScraper";
+import { trekScraper } from "../tools/trekScraper";
 
 export const scraperService = async () => {
+  let bikes = [];
 
-    setTimeout(async ()=> {
-        try {
-            const roadBikes = await (scraper("/road/performance"))
-            await console.log('roadbikes', roadBikes);
-        } catch (er) {
-            console.log('there was an error')
-        }
-    }, 500);
+  const bikesOnline = await bikesOnlineScraper("road/performance");
+  const trek = await trekScraper("road");
+  bikes = [...bikesOnline, ...trek];
 
-}
+  return bikes;
+};
