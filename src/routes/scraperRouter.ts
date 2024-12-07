@@ -1,17 +1,16 @@
 import express, { Express, Request, Response, Router } from "express";
-import bikesOnlineRouter from "./bikesOnlineRouter";
-import trekRouter from "./trekRouter";
-import roadBikeRouter from "./roadBikeRouter";
-// import { scraperService } from "../services/scraperService";
+import { cacheMiddleware } from "../tools/cacheMiddleware";
+import BikeController from "../controllers/bikeController";
 
 const router = express.Router();
 
-// different routes for each brand site
-router.use("/bikesOnline", bikesOnlineRouter);
-
-router.use("/trek", trekRouter);
-
-// make one router just for bike type?
-router.use("/roadBikes", roadBikeRouter);
+router.get("/road", cacheMiddleware, BikeController.getRoadBikes);
+router.get("/gravel", cacheMiddleware, BikeController.getGravelBikes);
+router.get("/hardtail", cacheMiddleware, BikeController.getHardTailBikes);
+router.get(
+  "/dualsuspension",
+  cacheMiddleware,
+  BikeController.getDualSuspensionBikes
+);
 
 export default router;
